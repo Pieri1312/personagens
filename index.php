@@ -299,18 +299,9 @@ $result = $conn->query("SELECT * FROM personagens");
                 </td>
                 <td><?= htmlspecialchars($row['poderes']) ?></td>
                 <td>
-                    <form method="POST" style="display:inline-block;" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
-                        <input type="text" name="nome" value="<?= htmlspecialchars($row['nome']) ?>" required>
-                        <textarea name="descricao" required><?= htmlspecialchars($row['descricao']) ?></textarea>
-                        <input type="text" name="sexo" value="<?= htmlspecialchars($row['sexo']) ?>" required>
-                        <input type="text" name="especie" value="<?= htmlspecialchars($row['especie']) ?>" required>
-                        <textarea name="biografia"><?= htmlspecialchars($row['biografia']) ?></textarea>
-                        <input type="hidden" name="foto_atual" value="<?= htmlspecialchars($row['foto']) ?>">
-                        <input type="file" name="foto">
-                        <textarea name="poderes"><?= htmlspecialchars($row['poderes']) ?></textarea>
-                        <button type="submit" name="update">Atualizar</button>
-                    </form>
+                    <a href="editar.php?id=<?= htmlspecialchars($row['id']) ?>" class="edit-link">
+                        <button type="button">Editar</button>
+                    </a>
                     <form method="POST" style="display:inline-block;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
                         <button type="submit" name="delete">Deletar</button>
