@@ -128,7 +128,7 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         button {
-            background-color: #2e7d32;
+            background-color: #1976d2;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -160,7 +160,7 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         th {
-            background-color: #2e7d32;
+            background-color: #1976d2;
             color: white;
         }
 
