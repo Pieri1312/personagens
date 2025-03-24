@@ -1,4 +1,3 @@
-
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -140,17 +139,19 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         button {
-            background-color: #1976d2;
+            background-color: #2196f3;
             color: white;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             margin-right: 12px;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 14px;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
         }
 
         button[name="delete"] {
@@ -166,25 +167,29 @@ $result = $conn->query("SELECT * FROM personagens");
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            background-color: #1e1e1e;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            border-radius: 12px;
+            background-color: #1a1a1a;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border-radius: 16px;
             overflow: hidden;
+            margin-top: 20px;
         }
 
         th, td {
-            padding: 16px;
+            padding: 18px;
             text-align: left;
             border-bottom: 1px solid #333;
             color: #fff;
+            font-size: 15px;
+            letter-spacing: 0.3px;
         }
 
         th {
-            background-color: #1976d2;
+            background-color: #2196f3;
             color: white;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-size: 14px;
         }
 
         tr:hover {
@@ -207,7 +212,7 @@ $result = $conn->query("SELECT * FROM personagens");
 </head>
 <body>
     <h1>Cadastro de Personagens</h1>
-    
+
     <div class="form-container">
         <h2>Novo Personagem</h2>
         <form method="POST" enctype="multipart/form-data">
