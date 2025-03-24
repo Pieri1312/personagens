@@ -87,32 +87,48 @@ $result = $conn->query("SELECT * FROM personagens");
     <meta charset="UTF-8">
     <title>Cadastro de Personagens</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'MedievalSharp', cursive;
             max-width: 1200px;
             margin: 0 auto;
             padding: 30px;
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #1a0f0f;
+            color: #d4c4a1;
             line-height: 1.6;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpUUqDnYQcchQnSyIijhKFYtgobQVWnUweekfNGlIUlwcBdeCgz+LVQcXZ10dXAVB8AfE0clJ0UVKvC8ptIjxwuN9nHfP4b37AKFWYprVNgZoum2mEnExk10RQ68IIYABhAXFzDIzkYY0PF/X8PH1LsqzvM/9OXqVnMkAn0g8y3TDIt4gnt60dM77xGFWkhTic+Jxgy5I/Mh12eU3zkWHBZ4ZNjKpeeIwsVhoY7mNWdFQiaeJo4qqUb6QcVnhvMVZLVdZ8578haGctrLMdZpDSGARS5AgQkENmyjDRpxWnRQLKdqPe/gHHb9ELoVcG2DkmEcFGmTXD/4Hv7u18hPjXlI4DrS/OM7HMBDaBepVx/k+dpz6CRB8Bq70pr9cA6Y/Sa82tegR0LsNXFw3NWUPuNwBBp4M2ZRdKUhLyOeB9zP6pizQfwt0r3q9NfZx+gCkqavkDXBwCIwUKHvN592Rnb39e6bR3w8d/3KFn6HzAgAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+UDGBYuLGHFlJ0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAsUlEQVRo3u3ZQQqDMBCF4T/qKbx4r573UldCEYrUkGQm5j3I1s/MvEVwzrIs2znGWFprD+89pZQXkW+2bXtYlJnJXJWZKedMKSUiIr/0CxG5df+DiP7mnPO0zhN7RLsI3TVZzYh2EWYeWVbXtfaNzHEcl/6R++IRZVDhxhX+SYU/hvxDhX/+ZNcK3RvRLkL3RpiPKIOK8PuIMqgoqChvRBlUFFQUVJT3owwqCir834U+kyLxP6tL/pUAAAAASUVORK5CYII=');
         }
 
         h1 {
-            color: #ffffff;
+            color: #ffd700;
             text-align: center;
             margin-bottom: 40px;
-            font-size: 2.5em;
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
         }
 
         .form-container {
-            background-color: #1e1e1e;
+            background-color: #2a1f1f;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-radius: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7);
             margin-bottom: 40px;
-            border: 1px solid #333;
+            border: 2px solid #8b4513;
+            position: relative;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid #8b4513;
+            pointer-events: none;
         }
 
         input[type="text"], textarea {
@@ -139,39 +155,41 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         button {
-            background-color: #2196f3;
-            color: white;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 8px;
+            background-color: #8b4513;
+            color: #ffd700;
+            padding: 12px 24px;
+            border: 2px solid #654321;
+            border-radius: 0;
             cursor: pointer;
             margin-right: 12px;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: 'MedievalSharp', cursive;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+            letter-spacing: 2px;
+            position: relative;
         }
 
         button[name="delete"] {
-            background-color: #d32f2f;
+            background-color: #800000;
+            border-color: #600000;
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background-color: #654321;
         }
 
         table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            background-color: #1a1a1a;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            border-radius: 16px;
-            overflow: hidden;
+            background-color: #2a1f1f;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+            border: 2px solid #8b4513;
             margin-top: 20px;
+            position: relative;
         }
 
         th, td {
@@ -184,16 +202,17 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         th {
-            background-color: #2196f3;
-            color: white;
-            font-weight: 600;
+            background-color: #8b4513;
+            color: #ffd700;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 14px;
+            letter-spacing: 2px;
+            font-size: 16px;
+            border-bottom: 2px solid #654321;
         }
 
         tr:hover {
-            background-color: #2a2a2a;
+            background-color: #3a2f2f;
             transition: background-color 0.3s ease;
         }
 
