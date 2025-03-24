@@ -93,20 +93,21 @@ $result = $conn->query("SELECT * FROM personagens");
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #1a1a1a;
+            color: #ffffff;
         }
 
         h1 {
-            color: #333;
+            color: #ffffff;
             text-align: center;
             margin-bottom: 30px;
         }
 
         .form-container {
-            background-color: white;
+            background-color: #2d2d2d;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             margin-bottom: 30px;
         }
 
@@ -114,9 +115,11 @@ $result = $conn->query("SELECT * FROM personagens");
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #444;
             border-radius: 4px;
             box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
         }
 
         textarea {
@@ -125,7 +128,7 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #2e7d32;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -135,7 +138,7 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         button[name="delete"] {
-            background-color: #f44336;
+            background-color: #d32f2f;
         }
 
         button:hover {
@@ -145,23 +148,24 @@ $result = $conn->query("SELECT * FROM personagens");
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #2d2d2d;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         th, td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #444;
+            color: #fff;
         }
 
         th {
-            background-color: #4CAF50;
+            background-color: #2e7d32;
             color: white;
         }
 
         tr:hover {
-            background-color: #f5f5f5;
+            background-color: #3d3d3d;
         }
 
         img {
