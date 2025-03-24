@@ -89,52 +89,68 @@ $result = $conn->query("SELECT * FROM personagens");
     <title>Cadastro de Personagens</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #1a1a1a;
+            padding: 30px;
+            background-color: #121212;
             color: #ffffff;
+            line-height: 1.6;
         }
 
         h1 {
             color: #ffffff;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .form-container {
-            background-color: #2d2d2d;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            border: 1px solid #333;
         }
 
         input[type="text"], textarea {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #444;
-            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            border-radius: 6px;
             box-sizing: border-box;
-            background-color: #333;
+            background-color: #2a2a2a;
             color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: #1976d2;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
         }
 
         textarea {
-            height: 100px;
+            height: 120px;
             resize: vertical;
         }
 
         button {
             background-color: #1976d2;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-right: 10px;
+            margin-right: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         button[name="delete"] {
@@ -142,36 +158,50 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         button:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
-            background-color: #2d2d2d;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         th, td {
-            padding: 12px;
+            padding: 16px;
             text-align: left;
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid #333;
             color: #fff;
         }
 
         th {
             background-color: #1976d2;
             color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         tr:hover {
-            background-color: #3d3d3d;
+            background-color: #2a2a2a;
+            transition: background-color 0.3s ease;
         }
 
         img {
-            max-width: 100px;
+            max-width: 120px;
             height: auto;
-            border-radius: 4px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
