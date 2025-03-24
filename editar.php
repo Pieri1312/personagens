@@ -42,9 +42,7 @@ if (isset($_GET['id'])) {
     $result = $stmt->execute();
     $personagem = $result->fetchArray(SQLITE3_ASSOC);
 }
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
