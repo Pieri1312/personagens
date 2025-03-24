@@ -97,7 +97,22 @@ $result = $conn->query("SELECT * FROM personagens");
             background-color: #1a0f0f;
             color: #d4c4a1;
             line-height: 1.6;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpUUqDnYQcchQnSyIijhKFYtgobQVWnUweekfNGlIUlwcBdeCgz+LVQcXZ10dXAVB8AfE0clJ0UVKvC8ptIjxwuN9nHfP4b37AKFWYprVNgZoum2mEnExk10RQ68IIYABhAXFzDIzkYY0PF/X8PH1LsqzvM/9OXqVnMkAn0g8y3TDIt4gnt60dM77xGFWkhTic+Jxgy5I/Mh12eU3zkWHBZ4ZNjKpeeIwsVhoY7mNWdFQiaeJo4qqUb6QcVnhvMVZLVdZ8578haGctrLMdZpDSGARS5AgQkENmyjDRpxWnRQLKdqPe/gHHb9ELoVcG2DkmEcFGmTXD/4Hv7u18hPjXlI4DrS/OM7HMBDaBepVx/k+dpz6CRB8Bq70pr9cA6Y/Sa82tegR0LsNXFw3NWUPuNwBBp4M2ZRdKUhLyOeB9zP6pizQfwt0r3q9NfZx+gCkqavkDXBwCIwUKHvN592Rnb39e6bR3w8d/3KFn6HzAgAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+UDGBYuLGHFlJ0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAsUlEQVRo3u3ZQQqDMBCF4T/qKbx4r573UldCEYrUkGQm5j3I1s/MvEVwzrIs2znGWFprD+89pZQXkW+2bXtYlJnJXJWZKedMKSUiIr/0CxG5df+DiP7mnPO0zhN7RLsI3TVZzYh2EWYeWVbXtfaNzHEcl/6R++IRZVDhxhX+SYU/hvxDhX/+ZNcK3RvRLkL3RpiPKIOK8PuIMqgoqChvRBlUFFQUVJT3owwqCir834U+kyLxP6tL/pUAAAAASUVORK5CYII=');
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238b4513' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(45deg, #1a0f0f 25%, #2a1f1f 25%, #2a1f1f 50%, #1a0f0f 50%, #1a0f0f 75%, #2a1f1f 75%, #2a1f1f);
+            background-size: 60px 60px, 60px 60px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%23ffd700' fill-opacity='0.05' d='M15 15h70l-35 70z'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
         }
 
         h1 {
@@ -111,24 +126,35 @@ $result = $conn->query("SELECT * FROM personagens");
         }
 
         .form-container {
-            background-color: #2a1f1f;
+            background-color: rgba(42, 31, 31, 0.95);
             padding: 30px;
-            border-radius: 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.7);
             margin-bottom: 40px;
-            border: 2px solid #8b4513;
+            border: 4px solid #8b4513;
             position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath fill='%238b4513' fill-opacity='0.1' d='M25 0L0 25l25 25 25-25z'/%3E%3C/svg%3E");
+        }
+
+        .form-container::before,
+        .form-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffd700;
         }
 
         .form-container::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            border: 1px solid #8b4513;
-            pointer-events: none;
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .form-container::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
         }
 
         input[type="text"], textarea {
