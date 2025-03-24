@@ -1,0 +1,90 @@
+<?php
+// Conexao com o banco de dados SQLite
+$conn = new SQLite3('personagens.db');
+
+// Criar tabela se nao existir
+$conn->exec("CREATE TABLE IF NOT EXISTS personagens (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descricao TEXT)");
+
+// Criar
+if (isset($_POST['create'])) {
+    $nome = $_POST['nome'];
+    $descricao = $_POST['descricao'];
+
+    $stmt = $conn->prepare("INSERT INTO personagens (nome, descricao) VALUES (:nome, :descricao)");
+    $stmt->bindValue(':nome', $nome, SQLITE3_TEXT);
+    $stmt->bindValue(':descricao', $descricao, SQLITE3_TEXT);
+    $stmt->execute();
+}
+
+// Ler
+$result = $conn->query("SELECT * FROM personagens");
+
+// Atualizar
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $descricao = $_POST['descricao'];
+
+    $stmt = $conn->prepare("UPDATE personagens SET nome = :nome, descricao = :descricao WHERE id = :id");
+    $stmt->bindValue(':nome', $nome, SQLITE3_TEXT);
+    $stmt->bindValue(':descricao', $descricao, SQLITE3_TEXT);
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+    $stmt->execute();
+}
+
+// Deletar
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+    $stmt = $conn->prepare("DELETE FROM personagens WHERE id = :id");
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+    $stmt->execute();
+}
+
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Personagens</title>
+</head>
+<body>
+    <h1>Cadastrar Personagem</h1>
+    <form method="POST">
+        <input type="text" name="nome" placeholder="Nome" required><br><br>
+        <textarea name="descricao" placeholder="Descricao" required></textarea><br><br>
+        <button type="submit" name="create">Cadastrar</button>
+    </form>
+
+    <h1>Lista de Personagens</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descricao</th>
+            <th>Acoes</th>
+        </tr>
+        <?php while ($row = $result->fetchArray(SQLITE3_ASSOC)): ?>
+            <tr>
+                <td><?= $row['id'] ?></td>
+                <td><?= $row['nome'] ?></td>
+                <td><?= $row['descricao'] ?></td>
+                <td>
+                    <form method="POST" style="display:inline-block;">
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                        <input type="text" name="nome" value="<?= $row['nome'] ?>">
+                        <input type="text" name="descricao" value="<?= $row['descricao'] ?>">
+                        <button type="submit" name="update">Atualizar</button>
+                    </form>
+
+                    <form method="POST" style="display:inline-block;">
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                        <button type="submit" name="delete">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endwhile; ?>
+    </table>
+</body>
+</html>
