@@ -1,9 +1,8 @@
+
 <?php
-// Ativar exibição de erros
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Verificar se o arquivo SQLite é válido ou recriar
 if (!file_exists('personagens.sql') || !is_readable('personagens.sql')) {
     $db = new SQLite3('personagens.sql');
     $db->exec("CREATE TABLE IF NOT EXISTS personagens (
@@ -19,10 +18,8 @@ if (!file_exists('personagens.sql') || !is_readable('personagens.sql')) {
     $db->close();
 }
 
-// Conexão com o banco de dados SQLite
 $conn = new SQLite3('personagens.sql');
 
-// Criar registro
 if (isset($_POST['create'])) {
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
@@ -31,7 +28,6 @@ if (isset($_POST['create'])) {
     $biografia = $_POST['biografia'];
     $poderes = $_POST['poderes'];
 
-    // Upload de foto
     $foto = '';
     if (!empty($_FILES['foto']['name'])) {
         $foto = 'uploads/' . basename($_FILES['foto']['name']);
@@ -49,7 +45,6 @@ if (isset($_POST['create'])) {
     $stmt->execute();
 }
 
-// Atualizar registro
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
     $nome = $_POST['nome'];
@@ -59,7 +54,6 @@ if (isset($_POST['update'])) {
     $biografia = $_POST['biografia'];
     $poderes = $_POST['poderes'];
 
-    // Upload de foto
     $foto = $_POST['foto_atual'];
     if (!empty($_FILES['foto']['name'])) {
         $foto = 'uploads/' . basename($_FILES['foto']['name']);
@@ -78,16 +72,13 @@ if (isset($_POST['update'])) {
     $stmt->execute();
 }
 
-// Excluir registro
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
-
     $stmt = $conn->prepare("DELETE FROM personagens WHERE id = :id");
     $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
     $stmt->execute();
 }
 
-// Ler registros
 $result = $conn->query("SELECT * FROM personagens");
 ?>
 
@@ -96,22 +87,108 @@ $result = $conn->query("SELECT * FROM personagens");
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Personagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button[name="delete"] {
+            background-color: #f44336;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Cadastrar Personagem</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="text" name="nome" placeholder="Nome" required><br><br>
-        <textarea name="descricao" placeholder="Descrição" required></textarea><br><br>
-        <input type="text" name="sexo" placeholder="Sexo" required><br><br>
-        <input type="text" name="especie" placeholder="Espécie" required><br><br>
-        <textarea name="biografia" placeholder="Biografia"></textarea><br><br>
-        <input type="file" name="foto"><br><br>
-        <textarea name="poderes" placeholder="Poderes/Habilidades"></textarea><br><br>
-        <button type="submit" name="create">Cadastrar</button>
-    </form>
+    <h1>Cadastro de Personagens</h1>
+    
+    <div class="form-container">
+        <h2>Novo Personagem</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <textarea name="descricao" placeholder="Descrição" required></textarea>
+            <input type="text" name="sexo" placeholder="Sexo" required>
+            <input type="text" name="especie" placeholder="Espécie" required>
+            <textarea name="biografia" placeholder="Biografia"></textarea>
+            <input type="file" name="foto">
+            <textarea name="poderes" placeholder="Poderes/Habilidades"></textarea>
+            <button type="submit" name="create">Cadastrar</button>
+        </form>
+    </div>
 
-    <h1>Lista de Personagens</h1>
-    <table border="1">
+    <table>
         <tr>
             <th>ID</th>
             <th>Nome</th>
@@ -133,7 +210,7 @@ $result = $conn->query("SELECT * FROM personagens");
                 <td><?= htmlspecialchars($row['biografia']) ?></td>
                 <td>
                     <?php if (!empty($row['foto'])): ?>
-                        <img src="<?= htmlspecialchars($row['foto']) ?>" alt="Foto" width="100">
+                        <img src="<?= htmlspecialchars($row['foto']) ?>" alt="Foto">
                     <?php endif; ?>
                 </td>
                 <td><?= htmlspecialchars($row['poderes']) ?></td>
