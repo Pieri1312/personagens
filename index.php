@@ -225,8 +225,7 @@ $result = $conn->query("SELECT * FROM personagens");
                         <input type="hidden" name="biografia" value="<?= htmlspecialchars($row['biografia']) ?>">
                         <input type="hidden" name="poderes" value="<?= htmlspecialchars($row['poderes']) ?>">
                         <input type="hidden" name="foto_atual" value="<?= htmlspecialchars($row['foto']) ?>">
-                        <input type="file" name="foto" style="max-width: 200px;" title="Modificar imagem">
-                        <label for="foto">Modificar imagem</label>
+                        <input type="file" name="foto" style="max-width: 200px;">
                         <button type="submit" name="update">Atualizar</button>
                     </form>
                     <form method="POST" style="display:inline-block;">
