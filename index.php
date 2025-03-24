@@ -301,15 +301,14 @@ $result = $conn->query("SELECT * FROM personagens");
                 <td>
                     <form method="POST" style="display:inline-block;" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
-                        <!-- Mantendo os valores originais em campos ocultos -->
-                        <input type="hidden" name="nome" value="<?= htmlspecialchars($row['nome']) ?>">
-                        <input type="hidden" name="descricao" value="<?= htmlspecialchars($row['descricao']) ?>">
-                        <input type="hidden" name="sexo" value="<?= htmlspecialchars($row['sexo']) ?>">
-                        <input type="hidden" name="especie" value="<?= htmlspecialchars($row['especie']) ?>">
-                        <input type="hidden" name="biografia" value="<?= htmlspecialchars($row['biografia']) ?>">
-                        <input type="hidden" name="poderes" value="<?= htmlspecialchars($row['poderes']) ?>">
+                        <input type="text" name="nome" value="<?= htmlspecialchars($row['nome']) ?>" required>
+                        <textarea name="descricao" required><?= htmlspecialchars($row['descricao']) ?></textarea>
+                        <input type="text" name="sexo" value="<?= htmlspecialchars($row['sexo']) ?>" required>
+                        <input type="text" name="especie" value="<?= htmlspecialchars($row['especie']) ?>" required>
+                        <textarea name="biografia"><?= htmlspecialchars($row['biografia']) ?></textarea>
                         <input type="hidden" name="foto_atual" value="<?= htmlspecialchars($row['foto']) ?>">
-                        <input type="file" name="foto" style="max-width: 200px;">
+                        <input type="file" name="foto">
+                        <textarea name="poderes"><?= htmlspecialchars($row['poderes']) ?></textarea>
                         <button type="submit" name="update">Atualizar</button>
                     </form>
                     <form method="POST" style="display:inline-block;">
