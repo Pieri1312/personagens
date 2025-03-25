@@ -70,13 +70,16 @@ if (isset($_POST['login'])) {
         .container {
             background-color: rgba(42, 31, 31, 0.95);
             padding: 40px;
-            border: 8px solid #ffd700;
-            max-width: 400px;
+            border: none;
+            max-width: 500px;
             width: 100%;
             position: relative;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3),
-                        inset 0 0 20px rgba(255, 215, 0, 0.2);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%23ffd700' fill-opacity='0.05' d='M25,25 L75,25 L50,75 z'/%3E%3C/svg%3E");
+            background: url("attached_assets/download (1).png") no-repeat center;
+            background-size: 100% 100%;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .container::before,
@@ -114,13 +117,16 @@ if (isset($_POST['login'])) {
         }
 
         input {
-            width: 100%;
+            width: 90%;
             padding: 10px;
-            margin-top: 5px;
-            background-color: #2a1f1f;
-            border: 1px solid #8b4513;
-            color: #fff;
+            margin: 5px auto;
+            background-color: rgba(42, 31, 31, 0.8);
+            border: none;
+            color: #ffd700;
             font-family: 'MedievalSharp', cursive;
+            font-size: 18px;
+            text-align: center;
+            display: block;
         }
 
         button {
