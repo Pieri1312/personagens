@@ -36,6 +36,8 @@ if (isset($_POST['login'])) {
     
     if ($user = $result->fetchArray()) {
         if (password_verify($senha, $user['senha'])) {
+            session_start();
+            $_SESSION['usuario'] = $usuario;
             header("Location: index.php");
             exit();
         }
@@ -62,16 +64,19 @@ if (isset($_POST['login'])) {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238b4513' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%23ffd700' fill-opacity='0.1' d='M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z'/%3E%3C/svg%3E");
         }
 
         .container {
             background-color: rgba(42, 31, 31, 0.95);
             padding: 40px;
-            border: 4px solid #8b4513;
+            border: 8px solid #ffd700;
             max-width: 400px;
             width: 100%;
             position: relative;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3),
+                        inset 0 0 20px rgba(255, 215, 0, 0.2);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%23ffd700' fill-opacity='0.05' d='M25,25 L75,25 L50,75 z'/%3E%3C/svg%3E");
         }
 
         .container::before,
