@@ -3,8 +3,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-session_start();
-
 $conn = new SQLite3('personagens.sql');
 
 $conn->exec("CREATE TABLE IF NOT EXISTS usuarios (
@@ -38,6 +36,7 @@ if (isset($_POST['login'])) {
     
     if ($user = $result->fetchArray()) {
         if (password_verify($senha, $user['senha'])) {
+            session_start();
             $_SESSION['usuario'] = $usuario;
             header("Location: index.php");
             exit();
@@ -46,6 +45,7 @@ if (isset($_POST['login'])) {
     $mensagem = "Usuário ou senha incorretos";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
