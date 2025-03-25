@@ -50,7 +50,7 @@ if (isset($_POST['login'])) {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Login - RPG Characters</title>
+    <title>Login - BANK OF LORE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
         
