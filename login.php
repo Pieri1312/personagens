@@ -352,7 +352,7 @@ if (isset($_POST['login'])) {
             <i class="fas fa-dragon"></i>
         </div>
         
-        <h1>RPG Characters</h1>
+        <h1>Banco de personagens</h1>
         
         <div class="tabs">
             <div class="tab active" onclick="showForm('login')">Login</div>
