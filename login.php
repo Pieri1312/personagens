@@ -1,6 +1,13 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
+
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 
 $conn = new SQLite3('personagens.sql');
 
@@ -13,7 +20,7 @@ $conn->exec("CREATE TABLE IF NOT EXISTS usuarios (
 if (isset($_POST['cadastrar'])) {
     $usuario = $_POST['usuario'];
     $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-    
+
     try {
         $stmt = $conn->prepare("INSERT INTO usuarios (usuario, senha) VALUES (:usuario, :senha)");
         $stmt->bindValue(':usuario', $usuario, SQLITE3_TEXT);
@@ -28,14 +35,13 @@ if (isset($_POST['cadastrar'])) {
 if (isset($_POST['login'])) {
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
-    
+
     $stmt = $conn->prepare("SELECT * FROM usuarios WHERE usuario = :usuario");
     $stmt->bindValue(':usuario', $usuario, SQLITE3_TEXT);
     $result = $stmt->execute();
-    
+
     if ($user = $result->fetchArray()) {
         if (password_verify($senha, $user['senha'])) {
-            session_start();
             $_SESSION['usuario'] = $usuario;
             header("Location: index.php");
             exit();
@@ -54,7 +60,7 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-        
+
         :root {
             --gold: #ffd700;
             --dark-brown: #2a1f1f;
@@ -63,13 +69,13 @@ if (isset($_POST['login'])) {
             --parchment: #d4c4a1;
             --background: #1a0f0f;
         }
-        
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             font-family: 'MedievalSharp', cursive;
             background-color: var(--background);
@@ -143,7 +149,7 @@ if (isset($_POST['login'])) {
         .logo {
             text-align: center;
             margin-bottom: 20px;
-            
+
         }
 
         .logo i {
@@ -332,11 +338,11 @@ if (isset($_POST['login'])) {
                 padding: 30px 15px;
                 min-height: 500px;
             }
-            
+
             h1 {
                 font-size: 1.8rem;
             }
-            
+
             input, button {
                 width: 95%;
             }
@@ -347,13 +353,13 @@ if (isset($_POST['login'])) {
     <div class="container">
         <div class="corner-top-right"></div>
         <div class="corner-bottom-left"></div>
-        
+
         <div class="logo">
             <i class="fas fa-dragon"></i>
         </div>
-        
-        <h1>Banco de personagens</h1>
-        
+
+        <h1>RPG Characters</h1>
+
         <div class="tabs">
             <div class="tab active" onclick="showForm('login')">Login</div>
             <div class="tab" onclick="showForm('cadastro')">Cadastro</div>
@@ -392,7 +398,7 @@ if (isset($_POST['login'])) {
         <?php if (isset($mensagem)): ?>
             <div class="message"><?= htmlspecialchars($mensagem) ?></div>
         <?php endif; ?>
-        
+
         <div class="footer">
             Bem-vindo ao mundo de aventuras
         </div>
@@ -403,10 +409,10 @@ if (isset($_POST['login'])) {
             // Remove active class from all forms
             document.getElementById('loginForm').classList.remove('active');
             document.getElementById('cadastroForm').classList.remove('active');
-            
+
             // Add active class to selected form
             document.getElementById(formType + 'Form').classList.add('active');
-            
+
             // Update tabs
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
