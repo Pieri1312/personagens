@@ -2,7 +2,7 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
+// Redireciona para a página de login se o usuário não estiver logado
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit();
@@ -144,8 +144,8 @@ $result = $conn->query("SELECT * FROM personagens");
         .form-container::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 40px;
+            height: 40px;
             border: 2px solid #ffd700;
         }
 
@@ -262,7 +262,15 @@ $result = $conn->query("SELECT * FROM personagens");
     </style>
 </head>
 <body>
-    <h1>Cadastro de Personagens</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+        <h1>Cadastro de Personagens</h1>
+        <div style="display: flex; gap: 10px;">
+            <a href="listar.php"><button type="button">Ver Lista</button></a>
+            <form action="login.php" method="POST" style="margin: 0;">
+                <button type="submit" name="logout" style="background-color: #800000;">Logout</button>
+            </form>
+        </div>
+    </div>
 
     <div class="form-container">
         <h2>Novo Personagem</h2>
