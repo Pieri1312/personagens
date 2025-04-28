@@ -11,6 +11,8 @@ if (isset($_POST['logout'])) {
 
 $conn = new SQLite3('personagens.sql');
 
+$conn->exec("DROP TABLE IF EXISTS usuarios");
+
 $conn->exec("CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     usuario TEXT NOT NULL UNIQUE,
