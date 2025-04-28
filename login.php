@@ -83,11 +83,6 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         :root {
             --gold: #ffd700;
             --dark-brown: #2a1f1f;
@@ -96,21 +91,11 @@ if (isset($_POST['login'])) {
             --parchment: #d4c4a1;
             --background: #1a0f0f;
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         body {
             font-family: 'MedievalSharp', cursive;
             background-color: var(--background);
@@ -184,11 +169,6 @@ if (isset($_POST['login'])) {
         .logo {
             text-align: center;
             margin-bottom: 20px;
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         }
 
         .logo i {
@@ -377,19 +357,11 @@ if (isset($_POST['login'])) {
                 padding: 30px 15px;
                 min-height: 500px;
             }
-<<<<<<< HEAD
 
             h1 {
                 font-size: 1.8rem;
             }
 
-=======
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
             input, button {
                 width: 95%;
             }
@@ -400,7 +372,6 @@ if (isset($_POST['login'])) {
     <div class="container">
         <div class="corner-top-right"></div>
         <div class="corner-bottom-left"></div>
-<<<<<<< HEAD
 
         <div class="logo">
             <i class="fas fa-dragon"></i>
@@ -408,15 +379,6 @@ if (isset($_POST['login'])) {
 
         <h1>RPG Characters</h1>
 
-=======
-        
-        <div class="logo">
-            <i class="fas fa-dragon"></i>
-        </div>
-        
-        <h1>Banco de personagens</h1>
-        
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         <div class="tabs">
             <div class="tab active" onclick="showForm('login')">Login</div>
             <div class="tab" onclick="showForm('cadastro')">Cadastro</div>
@@ -455,11 +417,6 @@ if (isset($_POST['login'])) {
         <?php if (isset($mensagem)): ?>
             <div class="message"><?= htmlspecialchars($mensagem) ?></div>
         <?php endif; ?>
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         <div class="footer">
             Bem-vindo ao mundo de aventuras
         </div>
@@ -470,17 +427,10 @@ if (isset($_POST['login'])) {
             // Remove active class from all forms
             document.getElementById('loginForm').classList.remove('active');
             document.getElementById('cadastroForm').classList.remove('active');
-<<<<<<< HEAD
 
             // Add active class to selected form
             document.getElementById(formType + 'Form').classList.add('active');
 
-=======
-            
-            // Add active class to selected form
-            document.getElementById(formType + 'Form').classList.add('active');
-            
->>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
             // Update tabs
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
