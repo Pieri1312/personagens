@@ -1,19 +1,46 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
+
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 
 $conn = new SQLite3('personagens.sql');
 
 $conn->exec("CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     usuario TEXT NOT NULL UNIQUE,
-    senha TEXT NOT NULL
+    senha TEXT NOT NULL,
+    is_admin INTEGER DEFAULT 0
 )");
+
+// Create admin users if they don't exist
+$stmt = $conn->prepare("SELECT COUNT(*) as count FROM usuarios WHERE usuario IN ('admin1', 'admin2')");
+$result = $stmt->execute();
+$count = $result->fetchArray(SQLITE3_ASSOC)['count'];
+
+if ($count < 2) {
+    $stmt = $conn->prepare("INSERT OR IGNORE INTO usuarios (usuario, senha, is_admin) VALUES (:usuario, :senha, 1)");
+
+    // Create admin1
+    $stmt->bindValue(':usuario', 'admin1', SQLITE3_TEXT);
+    $stmt->bindValue(':senha', password_hash('admin1', PASSWORD_DEFAULT), SQLITE3_TEXT);
+    $stmt->execute();
+
+    // Create admin2
+    $stmt->bindValue(':usuario', 'admin2', SQLITE3_TEXT);
+    $stmt->bindValue(':senha', password_hash('admin2', PASSWORD_DEFAULT), SQLITE3_TEXT);
+    $stmt->execute();
+}
 
 if (isset($_POST['cadastrar'])) {
     $usuario = $_POST['usuario'];
     $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-    
+
     try {
         $stmt = $conn->prepare("INSERT INTO usuarios (usuario, senha) VALUES (:usuario, :senha)");
         $stmt->bindValue(':usuario', $usuario, SQLITE3_TEXT);
@@ -28,15 +55,15 @@ if (isset($_POST['cadastrar'])) {
 if (isset($_POST['login'])) {
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
-    
+
     $stmt = $conn->prepare("SELECT * FROM usuarios WHERE usuario = :usuario");
     $stmt->bindValue(':usuario', $usuario, SQLITE3_TEXT);
     $result = $stmt->execute();
-    
+
     if ($user = $result->fetchArray()) {
         if (password_verify($senha, $user['senha'])) {
-            session_start();
             $_SESSION['usuario'] = $usuario;
+            $_SESSION['is_admin'] = $user['is_admin'];
             header("Location: index.php");
             exit();
         }
@@ -54,7 +81,11 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         :root {
             --gold: #ffd700;
             --dark-brown: #2a1f1f;
@@ -63,13 +94,21 @@ if (isset($_POST['login'])) {
             --parchment: #d4c4a1;
             --background: #1a0f0f;
         }
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         body {
             font-family: 'MedievalSharp', cursive;
             background-color: var(--background);
@@ -143,7 +182,11 @@ if (isset($_POST['login'])) {
         .logo {
             text-align: center;
             margin-bottom: 20px;
+<<<<<<< HEAD
+
+=======
             
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         }
 
         .logo i {
@@ -332,11 +375,19 @@ if (isset($_POST['login'])) {
                 padding: 30px 15px;
                 min-height: 500px;
             }
+<<<<<<< HEAD
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+=======
             
             h1 {
                 font-size: 1.8rem;
             }
             
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
             input, button {
                 width: 95%;
             }
@@ -347,6 +398,15 @@ if (isset($_POST['login'])) {
     <div class="container">
         <div class="corner-top-right"></div>
         <div class="corner-bottom-left"></div>
+<<<<<<< HEAD
+
+        <div class="logo">
+            <i class="fas fa-dragon"></i>
+        </div>
+
+        <h1>RPG Characters</h1>
+
+=======
         
         <div class="logo">
             <i class="fas fa-dragon"></i>
@@ -354,6 +414,7 @@ if (isset($_POST['login'])) {
         
         <h1>Banco de personagens</h1>
         
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         <div class="tabs">
             <div class="tab active" onclick="showForm('login')">Login</div>
             <div class="tab" onclick="showForm('cadastro')">Cadastro</div>
@@ -392,7 +453,11 @@ if (isset($_POST['login'])) {
         <?php if (isset($mensagem)): ?>
             <div class="message"><?= htmlspecialchars($mensagem) ?></div>
         <?php endif; ?>
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
         <div class="footer">
             Bem-vindo ao mundo de aventuras
         </div>
@@ -403,10 +468,17 @@ if (isset($_POST['login'])) {
             // Remove active class from all forms
             document.getElementById('loginForm').classList.remove('active');
             document.getElementById('cadastroForm').classList.remove('active');
+<<<<<<< HEAD
+
+            // Add active class to selected form
+            document.getElementById(formType + 'Form').classList.add('active');
+
+=======
             
             // Add active class to selected form
             document.getElementById(formType + 'Form').classList.add('active');
             
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
             // Update tabs
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
