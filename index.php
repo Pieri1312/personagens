@@ -8,6 +8,11 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+$is_admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1;
+if (!$is_admin && (isset($_POST['create']) || isset($_POST['update']) || isset($_POST['delete']))) {
+    die("Acesso negado. Apenas administradores podem modificar registros.");
+}
+
 if (!file_exists('personagens.sql') || !is_readable('personagens.sql')) {
     $db = new SQLite3('personagens.sql');
     $db->exec("CREATE TABLE IF NOT EXISTS personagens (
@@ -266,6 +271,12 @@ $result = $conn->query("SELECT * FROM personagens");
         <h1>Cadastro de Personagens</h1>
         <div style="display: flex; gap: 10px;">
             <a href="listar.php"><button type="button">Ver Lista</button></a>
+<<<<<<< HEAD
+            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                <a href="usuarios.php"><button type="button">Gerenciar Usuários</button></a>
+            <?php endif; ?>
+=======
+>>>>>>> 2f7d884a6559a848f81c11e541ae2ca6bdd06b6e
             <form action="login.php" method="POST" style="margin: 0;">
                 <button type="submit" name="logout" style="background-color: #800000;">Logout</button>
             </form>
